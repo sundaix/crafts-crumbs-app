@@ -1,0 +1,7 @@
+{
+  "name": "crafts-crumbs-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
