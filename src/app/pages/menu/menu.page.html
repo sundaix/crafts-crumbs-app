@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search" [debounce]="200" (ionInput)="onSearch($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @if (groupTabs().length > 2) {
+    <ion-segment [value]="activeGroup()" (ionChange)="setGroup($event)">
+      @for (g of groupTabs(); track g) {
+        <ion-segment-button [value]="g"><ion-label>{{ g }}</ion-label></ion-segment-button>
+      }
+    </ion-segment>
+  }
+
+  <div class="chips">
+    <button type="button" class="chip" [class.active]="activeSub() === 'All'" (click)="setSub('All')">All</button>
+    @for (c of subTabs(); track c.id) {
+      <button type="button" class="chip" [class.active]="activeSub() === c.id" (click)="setSub(c.id)">{{ c.sub }}</button>
+    }
+  </div>
+
+  @if (products.loading() && !products.products().length) {
+    <div class="state"><ion-spinner name="crescent"></ion-spinner></div>
+  } @else if (products.error()) {
+    <div class="state">
+      <p>{{ products.error() }}</p>
+      <button type="button" class="retry" (click)="reload()">Try again</button>
+    </div>
+  } @else if (!visibleProducts().length) {
+    <div class="state"><p>No items found.</p></div>
+  } @else {
+    <div class="grid">
+      @for (p of visibleProducts(); track p.id) {
+        <article class="card" [class.sold-out]="isOut(p)">
+          <div class="card-img">
+            <img [src]="thumb(p)" [alt]="p.name" loading="lazy" (error)="onImgError($event, p)" />
+            @if (isOut(p)) { <span class="badge">Sold out</span> }
+          </div>
+          <div class="card-info">
+            <h3>{{ p.name }}</h3>
+            <p class="price">{{ price(p) }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</ion-content>

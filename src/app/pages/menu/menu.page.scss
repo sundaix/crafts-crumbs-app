@@ -1,0 +1,83 @@
+ion-segment { margin: 4px 12px 0; width: calc(100% - 24px); }
+
+.chips {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.chip {
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--ion-color-step-250, #c8c8c8);
+  background: transparent;
+  color: var(--ion-text-color);
+  font-size: 13px;
+  &.active {
+    background: #C08552;       // café accent from the website
+    border-color: #C08552;
+    color: #fff;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 4px 12px 24px;
+}
+
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--ion-card-background, var(--ion-item-background, #fff));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  &.sold-out img { opacity: 0.45; }
+}
+
+.card-img {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #F7F5F1;          // neutral backdrop so product photos read well in dark mode too
+  img { width: 100%; height: 100%; object-fit: cover; display: block; }
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 11px;
+}
+
+.card-info {
+  padding: 10px 12px 12px;
+  h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .price { margin: 0; font-size: 13px; color: #C08552; font-weight: 600; }
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+
+.retry {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 0;
+  background: #C08552;
+  color: #fff;
+}
